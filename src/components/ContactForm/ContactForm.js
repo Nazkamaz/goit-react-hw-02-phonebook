@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
+import s from './ContactForm.module.css';
+
 
 class ContactForm extends Component{
 
@@ -9,7 +11,7 @@ class ContactForm extends Component{
     state={
     name: '',
     number: '',
-    id: nanoid(5),
+    id: '',
     }
 
 handleChange = e => {
@@ -19,11 +21,8 @@ handleChange = e => {
 
   handleSubmit = e => {
     e.preventDefault();
-    const {id, name, number, } = this.state;
-    // console.log(this.props);
-    // console.log(this.state)
-    
-    this.props.onSubmit({ id, name, number });
+    const { name, number, } = this.state;  
+    this.props.onSubmit({ id:nanoid(8), name, number });
     
     this.reset();
   };
@@ -40,6 +39,7 @@ handleChange = e => {
             <label>
                 Name
 <input
+  className={s.inputStyles}
   type="text"
   name="name"
   value={name}
@@ -52,6 +52,7 @@ handleChange = e => {
  <label>
           Number
           <input
+          className={s.inputStyles}
             type="tel"
             name="number"
             value={number}
@@ -61,7 +62,7 @@ handleChange = e => {
             required
           />
         </label>
-        <button type="submit">
+        <button type="submit" className={s.buttonDelete}>
           Add contact
         </button>
 </form>
